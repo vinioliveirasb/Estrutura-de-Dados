@@ -1,4 +1,4 @@
-
+// exercicio para listar nomes//
 List<string> listaNomes = new List<string>();
 string opcao;
 string nome;
