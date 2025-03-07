@@ -1,5 +1,4 @@
-//Criar uma Lista com N Numeros Aleatorios ( DE 0 A 100) tamanho N  e sem repetição 
-
+//gerar duas listas de números aleatórios com o mesmo sistema da primeira, e depois criar uma terceira lista com os números comuns entre as duas primeiras listas.
 
 
 using System;
@@ -11,30 +10,60 @@ class Program
     {
         // Defina o tamanho da lista N
         int N;
-        Console.Write("Digite o tamanho da lista (N): ");
+        Console.Write("Digite o tamanho das listas (N): ");
         N = int.Parse(Console.ReadLine());
 
-        // Lista para armazenar os números aleatórios
-        List<int> listaNumeros = new List<int>();
-        Random random = new Random();
+        // Listas para armazenar os números aleatórios
+        List<int> lista1 = GerarListaUnica(N);
+        List<int> lista2 = GerarListaUnica(N);
 
-        // Gerar números aleatórios sem repetição
-        while (listaNumeros.Count < N)
+        // Lista para armazenar os números em comum
+        List<int> listaComum = new List<int>();
+
+        // Encontrar os números comuns entre lista1 e lista2
+        foreach (var numero in lista1)
         {
-            int numeroAleatorio = random.Next(0, 101); // Gera um número entre 0 e 100
-
-            // Verifica se o número já está na lista
-            if (!listaNumeros.Contains(numeroAleatorio))
+            if (lista2.Contains(numero))
             {
-                listaNumeros.Add(numeroAleatorio); // Adiciona à lista se não houver repetição
+                listaComum.Add(numero);
             }
         }
 
-        // Exibe a lista gerada
-        Console.WriteLine($"Lista com {N} números aleatórios (sem repetição):");
-        foreach (var numero in listaNumeros)
+        // Exibe as listas
+        Console.WriteLine("Lista 1:");
+        foreach (var numero in lista1)
         {
             Console.WriteLine(numero);
         }
+
+        Console.WriteLine("\nLista 2:");
+        foreach (var numero in lista2)
+        {
+            Console.WriteLine(numero);
+        }
+
+        Console.WriteLine("\nLista com números comuns:");
+        foreach (var numero in listaComum)
+        {
+            Console.WriteLine(numero);
+        }
+    }
+
+    // Função para gerar uma lista de números únicos
+    static List<int> GerarListaUnica(int N)
+    {
+        List<int> lista = new List<int>();
+        Random random = new Random();
+
+        while (lista.Count < N)
+        {
+            int numeroAleatorio = random.Next(0, 101); // Gera número entre 0 e 100
+            if (!lista.Contains(numeroAleatorio)) // Verifica se já existe na lista
+            {
+                lista.Add(numeroAleatorio); // Adiciona à lista se não houver repetição
+            }
+        }
+
+        return lista;
     }
 }
